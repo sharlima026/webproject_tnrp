@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .panel-body {
+        text-align: left !important;
+    }
+
+    .jumbotron {
+        color: black !important;
+    }
+
+    .twitter-tweet {
+        display: inline-block !important;
+
+
+    }
+
+    p {
+        font-size: 12px !important;
+        font-family: fantasy;
+
+    }
+    .fig{
+        text-align: center!important;
+    }
+
+    h6 {
+        color: rgb(165, 42, 42) !important;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="panel  ">
+            <div class="panel-heading">
+                <div class="media">
+                    <a class="media-left" href="#fake">
+                        <img alt="" class="media-object img-rounded" height="34px"
+                            src="{{ url_for('static', filename='logo.png') }}">
+                    </a>
+
+
+                    <div class="media-body">
+                        <div class="form-group has-feedback">
+                            <label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
+                            <input type="text" class="form-control" id="search2" aria-describedby="search">
+                            <span class="glyphicon glyphicon-camera form-control-feedback" aria-hidden="true"></span>
+                            <span id="search2" class="sr-only">(success)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            {% for t in Tweets.items %}
+            <div class="fig">
+                <blockquote class=" twitter-tweet" width="520px"  data-lang="en" data-dnt="true" background-colour="#E81C4F"
+                    data-link-color="#E81C4F">
+
+                    <div class="jumbotron col-sm-5 media">
+                        <a class="media-left" href="#fake">
+                            <img alt="" class="media-object img-rounded" href="{{t.pro_pic}}" height="35px"
+                                src="{{t.pro_pic}}">
+                        </a>
+
+
+                        <div class="media-body">
+                            <h6 class="media-heading">@{{t.user_name}}</h6>
+
+                            {% if t.inTextAUrl=="NoUrl" %}
+
+                            <p>{{t.tweetText}}</p>
+                            <img alt="" class="tweetmedia" src={{t.media}}>
+
+
+                            {% else %}
+                            <p>{{t.tweetText}}</p>
+
+                            <img alt="" class="tweetmedia" src={{t.inTextAUrl}}>
+
+                            <a href="{{t.inTextAUrl}}">Click here</a>
+                            {%endif%}
+
+                            <!-- <ul class="nav nav-pills nav-pills-custom">
+                            <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-option-horizontal"></span></a></li>
+                          </ul> -->
+                        </div>
+                    </div>
+
+                    <p lang="en" dir="ltr">
+                        <a
+                            href="https://twitter.com/{{t.user_name}}/status/{{t.tweet_id}}?ref_src={{t.inTextAUrl}}"></a>
+                    </p>
+
+
+                </blockquote>
+            </div>
+
+
+
+
+
+
+
+            {% endfor %}
+
+<hr>
+            {% for page_num in Tweets.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+            {% if Tweets.page == page_num %}
+            <a class="btn btn-danger mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+            <a class="btn btn-outline-danger mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+            {% else %}
+            ...
+            {% endif %}
+            {% endfor %}
+
+            <hr>
+
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock content %}

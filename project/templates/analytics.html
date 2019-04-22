@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    #ana {
+        text-align: left;
+    }
+</style>
+
+
+
+<div id="ana">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+
+
+                    <div id="chart">
+                        <embed type="image/svg+xml" src={{ chartdata|safe }} />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="chart">
+                            <embed type="image/svg+xml" src={{ tweetData|safe }} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="container jumbotron content-section">
+            <table class="table">
+
+                <thead >
+
+                    <tr>
+                        <th scope="col">User id</th>
+                        <th scope="col">FirstName</th>
+                        <th scope="col">LastName</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for user in Users %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.firstname}}</td>
+                        <td>{{user.lastname}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td> {{user.role}}</td>
+                    </tr>
+                    {%endfor%}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+{% endblock content %}

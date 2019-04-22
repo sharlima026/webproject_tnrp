@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="assignment1">
+    <meta name="author" content="kevin christopher 815007355">
+    <title>TNRP</title>
+
+
+
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- truely fed up  -->
+    <style>
+        body {
+            text-align: center;
+            background-color: #222;
+            background-image: url("{{ url_for('static', filename='bg.jpg') }}");
+
+
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: auto;
+
+        }
+
+        .btn-outline-info {
+            background-color: rgb(136, 0, 0) !important;
+        }
+
+        legend,
+        .content-section,
+        .form-group {
+            color: aliceblue !important;
+        }
+
+        .jumbotron {
+            border-radius: 25px 25px !important;
+            -webkit-filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.466));
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.466));
+
+
+        }
+
+        .tweetmedia {
+            color: #222;
+            max-height: 200px
+        }
+
+        .glyphicon {
+            color: rgb(136, 0, 0)
+        }
+
+        .panel-heading {
+            background-color: rgb(136, 0, 0) !important;
+            color: aliceblue !important;
+            border-color: black !important;
+
+        }
+
+        .panel,
+        .content-section {
+            border-color: #191b1b;
+            background-color: #312f2f;
+            color: aliceblue;
+        }
+
+        header,
+        footer {
+            position: relative;
+            z-index: 10;
+            background-color: #222;
+            margin-bottom: 3em;
+            height: 5.9rem;
+
+            -webkit-filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.616));
+            filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.616));
+
+
+        }
+
+        footer {
+            height: 5em !important;
+
+
+        }
+
+
+        .h5 {
+
+            color: rgba(255, 0, 0, ) !important;
+        }
+
+        .btn-info {
+            background-color: rgb(136, 0, 0) !important;
+            width: 100% !important;
+            border-color: #191b1b;
+            border-radius: 25px !important;
+
+
+        }
+
+        .btn-info:hover {
+            border-color: white;
+
+            filter: brightness(75%) !important;
+        }
+
+        /* EXAMPLE 9 - Center with Flexbox and Text*/
+        .brand-centered {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        .brand-centered .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar {
+
+            border-color: #222 !important;
+            margin-left: 10% !important;
+            margin-right: 10% !important;
+        }
+
+        .navbar-toggle {
+            z-index: 1;
+        }
+
+        .navcon {
+            padding-top: 0;
+
+        }
+
+        /* footer {
+            width: 100%;
+            text-align: center;
+            color: aliceblue;
+            bottom: 0;
+            height: 5rem;
+              } */
+    </style>
+
+
+</head>
+
+<header>
+
+
+    <div class="container navcon">
+        <nav class="navbar  navbar-fixed-top navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="brand-centered">
+                        <a class="navbar-brand" href="{{ url_for('home') }}"><img
+                                style="margin-right: 10px; padding: 0;"
+                                src="{{ url_for('static', filename='logo1.png') }}" height="100%" alt="T.N.R.P">T.N.R.P
+                        </a>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <div class="brand-centered">
+                        <a class="navbar-brand" href="{{ url_for('home') }}"><img
+                                style="margin-right: 10px; padding: 0;"
+                                src="{{ url_for('static', filename='logo1.png') }}" height="100%" alt="T.N.R.P">T.N.R.P
+                        </a>
+                    </div>
+                    <ul class="nav navbar-nav">
+
+
+                        <li>
+                            <a href="{{ url_for('home') }}"><span class="glyphicon glyphicon-home"></span> Home</a>
+                        </li>
+                        <li>
+                            <a href="#fake"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
+                        </li>
+
+                    </ul>
+
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if current_user.is_authenticated %}
+                        {% if current_user.role=="Admin" %}
+
+                        <li><a href="{{ url_for('analytics') }}"><span
+                                    class="glyphicon glyphicon-user"></span>Analytics</a>
+                        </li>
+                        <li><a href="{{ url_for('account') }}"><span class="glyphicon glyphicon-user"></span>Account</a>
+                        </li>
+                        <li><a href="{{ url_for('logout') }}"><span
+                                    class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                        {%else%}
+                        <li><a href="{{ url_for('account') }}"><span class="glyphicon glyphicon-user"></span>Account</a>
+                        </li>
+                        <li><a href="{{ url_for('logout') }}"><span
+                                    class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                        {%endif%}
+
+                        {%else%}
+                        <li><a href="{{ url_for('register') }}"><span class="glyphicon glyphicon-user"></span> Sign
+                                Up</a></li>
+                        <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                        </li>
+                        {%endif%}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+
+    <br>
+
+
+
+
+
+</header>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert  alert-danger alert-{{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+
+
+
+
+
+
+    {% block content %}{% endblock %}
+
+
+
+    <!-- footerz -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+
+
+    
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">
+                <p><br>Kevin christopher, Amrit Sookhai,<br> Ashida Ali, Sharlima Seebaran,<br></p>
+            </span>
+        </div>
+    </footer>
+
+
+
+
+
+</body>
+
+</html>
